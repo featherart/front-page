@@ -13,14 +13,19 @@ class App extends Component {
   }
 
   render() {
-    var options = [
-      { value: 'one', label: 'One' },
-      { value: 'two', label: 'Two' },
-      { value: 'three', label: 'three' },
-      { value: 'four', label: 'Four' },
-      { value: 'five', label: 'Five' },
-      { value: 'six', label: 'Six' }
-    ];
+    var res = {};
+    var getOptions = (input) => {
+
+      return axios.get(`http://www.omdbapi.com/?t=${input}`)
+        .then((response) => {
+          console.log("response: ", response);
+          res = [{ value: `${response.data.Title}`, label: `${response.data.Title}`}];
+          return res;
+        }).then((json) => {
+          console.log('json: ', json);
+          return { options: res };
+        });
+    }
     return (
       <div className="App">
         <div className="App-header">
@@ -28,12 +33,11 @@ class App extends Component {
           <h2>Search Movies</h2>
         </div>
         <div className="search-bar">
-          <Select
+        <Select.Async
             name="form-field-name"
             value="one"
-            options={options}
-            onChange={this.logChange}
-          />
+            loadOptions={getOptions}
+        />
         </div>
       </div>
     );
