@@ -3,7 +3,7 @@ import axios from 'axios';
 import Select from 'react-select';
 
 import 'react-select/dist/react-select.css';
-import logo from './logo.svg';
+import logo from './owl.png';
 import './App.css';
 
 class App extends Component {
