@@ -10,6 +10,7 @@ class MovieSearch extends Component {
   onChange(value) {
     this.setState({ movie: value });
   }
+  // TODO put in a container component
   getUsers(input) {
     if (!input) {
       return Promise.resolve({ options: [] });
